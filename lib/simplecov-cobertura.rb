@@ -146,8 +146,8 @@ module SimpleCov
       # Roughly mirrors private method SimpleCov::Formatter::HTMLFormatter#output_coverage
       def output_message(result, output_path)
         output = "Coverage report generated for #{result.command_name} to #{output_path}."
-        output += "\nLine Coverage: #{result.covered_percent.round(2)}% (#{result.covered_lines} / #{result.total_lines})"
-        output += "\nBranch Coverage: #{result.coverage_statistics[:branch].percent.round(2)}% (#{result.covered_branches} / #{result.total_branches})" if SimpleCov.branch_coverage?
+        output += "\nLine Coverage: #{result.covered_percent.floor(2)}% (#{result.covered_lines} / #{result.total_lines})"
+        output += "\nBranch Coverage: #{result.coverage_statistics[:branch].percent.floor(2)}% (#{result.covered_branches} / #{result.total_branches})" if SimpleCov.branch_coverage?
         output
       end
 
@@ -156,7 +156,7 @@ module SimpleCov
         end
 
         def extract_rate(percent)
-          (percent / 100).round(4).to_s
+          (percent / 100).floor(4).to_s
         end
 
         def project_root
